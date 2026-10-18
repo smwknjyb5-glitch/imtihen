@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+ <!DOCTYPE html>     
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -165,6 +165,33 @@
   .row-actions button{background:none;border:1px solid var(--navy-700);color:#e8cd75;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:'Tajawal';font-size:.78rem;}
   .back-link{background:none;border:none;color:var(--gold-soft);cursor:pointer;font-family:'Tajawal';font-size:.85rem;margin-bottom:14px;padding:0;}
 
+  /* save / new exam + library */
+  .exam-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .exam-actions .ghost-btn{margin-top:0;}
+  .lib-item{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--navy-950);border:1px solid var(--navy-700);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+  .lib-item .lname{color:var(--gold-soft);font-weight:700;font-family:'Amiri',serif;font-size:1.1rem;}
+  .lib-item .lmeta{font-size:.78rem;color:#8b8368;margin-top:2px;}
+  .lib-item .lbtns{display:flex;gap:8px;}
+  .lib-item .lbtns button{background:none;border:1px solid var(--navy-700);color:#e8cd75;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:'Tajawal';font-size:.78rem;}
+  .lib-item .lbtns button.del{color:#c0554a;}
+
+  /* usage guide */
+  details.guide{background:linear-gradient(180deg,var(--navy-800),var(--navy-900));border:1px solid var(--gold-dim);border-radius:18px;padding:6px 20px;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+  details.guide summary{cursor:pointer;font-family:'Amiri',serif;font-size:1.3rem;color:var(--gold-soft);padding:14px 0;list-style:none;}
+  details.guide summary::-webkit-details-marker{display:none;}
+  details.guide summary::after{content:' ▾';font-size:.9rem;}
+  details.guide[open] summary::after{content:' ▴';}
+  .guide-body{padding-bottom:16px;line-height:1.95;color:#d6cfb4;font-size:.95rem;}
+  .guide-body h4{font-family:'Amiri',serif;color:var(--gold-soft);margin:16px 0 6px;font-size:1.1rem;}
+  .guide-body ol{margin:0;padding-right:22px;}
+  .guide-body li{margin-bottom:6px;}
+  .guide-body b{color:var(--gold-soft);}
+  .ex-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem;background:var(--navy-950);border-radius:10px;overflow:hidden;}
+  .ex-table th,.ex-table td{padding:9px 10px;border-bottom:1px solid var(--navy-700);text-align:right;vertical-align:top;}
+  .ex-table th{color:#a79f86;font-size:.78rem;}
+  .ex-table td.ok{color:#7fd19d;}
+  .guide-note{background:rgba(212,175,55,.08);border:1px dashed var(--gold-dim);border-radius:10px;padding:10px 12px;margin-top:12px;font-size:.88rem;}
+
   @media (max-width:600px){
     .paper{padding:24px 18px;}
     .score-stamp{width:70px;height:70px;top:8px;left:8px;}
@@ -202,6 +229,38 @@
 
   <!-- ============ BUILDER ============ -->
   <section id="build" class="active">
+
+    <details class="guide" open>
+      <summary>📘 كيف أستعمل الموقع؟ (شرح بمثال)</summary>
+      <div class="guide-body">
+        <h4>الخطوات</h4>
+        <ol>
+          <li><b>أعدّ الامتحان:</b> اكتب نص السؤال، اختر نوعه، حدّد الإجابة الصحيحة وعدد النقاط، ثم اضغط «إضافة السؤال إلى الامتحان». كرّر ذلك لكل سؤال. بعد الانتهاء اضغط «💾 حفظ الامتحان» ليُحفظ باسم تختاره في قائمة «الامتحانات المحفوظة» (تفتحه لاحقًا بزر «فتح»)، و«🆕 امتحان جديد» لبدء امتحان فارغ.</li>
+          <li><b>سلّم الجهاز للتلميذ:</b> اضغط «🎓 واجهة التلميذ». سيُطلب منك رمز سري اختياري، ثم يختفي شريط الإعداد فلا يرى التلميذ إلا ورقة الإجابة.</li>
+          <li><b>التلميذ يجيب:</b> يكتب اسمه، يجيب عن الأسئلة، ثم يضغط «إرسال الإجابة». بعدها تُسلَّم الجهاز لتلميذ آخر بنفس الطريقة (تفتح واجهة التلميذ من جديد).</li>
+          <li><b>أنت تصحّح:</b> اضغط «🔒 خروج الأستاذ» (وأدخل الرمز إن وضعته)، ثم افتح «🧑‍🏫 واجهة الأستاذ»، اختر الورقة واضغط «صحّح الورقة». تظهر علامات ✓ و✗ والنتيجة على الختم.</li>
+          <li><b>احفظ واطبع:</b> اضغط «حفظ النتيجة» لتثبيتها في القائمة، و«طباعة الورقة المصححة» لإخراجها على الورق.</li>
+        </ol>
+
+        <h4>مثال جاهز: امتحان من 3 أسئلة</h4>
+        <table class="ex-table">
+          <thead><tr><th>#</th><th>النوع</th><th>السؤال</th><th>الإجابة الصحيحة</th><th>النقاط</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>اختيار من متعدد</td><td>ما اسم الولاية ذات الرقم 23   ؟<br>الاختيارات: قسنطينة-عنابة-سكيكدة </td><td class="ok"> عنابة</td><td>2</td></tr>
+            <tr><td>2</td><td>صح / خطأ</td><td> العدد 132 يقبل القسمة على 3</td><td class="ok">صح</td><td>1</td></tr>
+            <tr><td>3</td><td>إجابة قصيرة</td><td> ما هو حاصل قسمة 24 على 4 </td><td class="ok">6</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <p>مجموع النقاط = 4. لو أجاب تلميذ بـ «2x» وأخطأ في السؤال الثاني وأصاب الثالث، تكون نتيجته <b>3 / 4</b>.</p>
+        <button class="ghost-btn" onclick="loadSample()">⚡ أضِف هذا المثال إلى امتحاني للتجربة</button>
+
+        <div class="guide-note">
+          💡 <b>ملاحظات:</b> الإجابة القصيرة تُقارَن بعد تجاهل المسافات الزائدة واختلاف الهمزات (أ/ا) وحالة الأحرف.
+          البيانات تُحفظ في متصفح هذا الجهاز فقط، فاستعمل نفس الجهاز والمتصفح للتلاميذ وللتصحيح، ولا تمسح بيانات المتصفح قبل التصحيح.
+        </div>
+      </div>
+    </details>
+
     <div class="panel">
       <h2>سؤال جديد</h2>
       <label>نص السؤال</label>
@@ -241,6 +300,15 @@
         <span>مجموع النقاط: <b id="totalpoints">0</b></span>
         <span id="save-note" style="color:#7fd19d;font-size:.8rem;"></span>
       </div>
+      <div class="exam-actions">
+        <button class="primary-btn" onclick="saveCurrentExam()">💾 حفظ الامتحان</button>
+        <button class="ghost-btn" onclick="newExam()">🆕 امتحان جديد</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>الامتحانات المحفوظة (<span id="libcount">0</span>)</h2>
+      <div id="lib-list"></div>
     </div>
   </section>
 
@@ -435,6 +503,106 @@ function renderQList(){
 }
 function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 renderQList();
+
+/* ---------------- saved exams library ---------------- */
+const LIB_KEY='musahih_library_v1';
+let currentExamName='';
+function loadLib(){ try{return JSON.parse(localStorage.getItem(LIB_KEY))||[];}catch(e){return [];} }
+function saveLib(l){ try{localStorage.setItem(LIB_KEY, JSON.stringify(l));}catch(e){} }
+
+function saveCurrentExam(){
+  if(!questions.length){alert('أضِف سؤالًا واحدًا على الأقل قبل حفظ الامتحان');return false;}
+  const name=prompt('اسم الامتحان (مثال: فرض الفصل الأول):', currentExamName);
+  if(name===null) return false;
+  const clean=name.trim();
+  if(!clean){alert('الرجاء كتابة اسم للامتحان');return false;}
+  const lib=loadLib();
+  const idx=lib.findIndex(e=>e.name===clean);
+  if(idx!==-1 && !confirm('يوجد امتحان محفوظ بهذا الاسم. هل تريد استبداله؟')) return false;
+  const entry={
+    id: idx!==-1 ? lib[idx].id : Date.now(),
+    name: clean,
+    ts: new Date().toLocaleString('ar'),
+    questions: JSON.parse(JSON.stringify(questions))
+  };
+  if(idx!==-1) lib[idx]=entry; else lib.push(entry);
+  saveLib(lib);
+  currentExamName=clean;
+  renderLibrary();
+  flashSaved();
+  return true;
+}
+
+function offerClearSubs(){
+  if(loadSubs().length && confirm('توجد أوراق تلاميذ مرسلة للامتحان السابق ولا تناسب الامتحان الجديد.\nهل تريد حذفها؟ (موصى به، بعد أن تكون قد صحّحتها وحفظتها أو طبعتها)')){
+    saveSubs([]);
+  }
+}
+
+function newExam(){
+  if(questions.length && !confirm('سيتم مسح أسئلة الامتحان الحالي من الشاشة.\nإن لم تحفظه بعد فاضغط «إلغاء» ثم استعمل زر «حفظ الامتحان».\nهل تريد بدء امتحان جديد؟')) return;
+  offerClearSubs();
+  questions=[];
+  qidSeq=Date.now();
+  currentExamName='';
+  saveExam();
+  renderQList();
+  document.getElementById('qtext').focus();
+}
+
+function openSaved(id){
+  const e=loadLib().find(x=>x.id===id);
+  if(!e) return;
+  if(questions.length && !confirm('سيحلّ هذا الامتحان محل الأسئلة الحالية على الشاشة.\nاحفظ الامتحان الحالي أولًا إن لزم. هل تريد المتابعة؟')) return;
+  offerClearSubs();
+  questions=JSON.parse(JSON.stringify(e.questions));
+  qidSeq=Math.max(Date.now(), ...questions.map(q=>q.id+1));
+  currentExamName=e.name;
+  saveExam();
+  renderQList();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function deleteSaved(id){
+  const e=loadLib().find(x=>x.id===id);
+  if(!e) return;
+  if(!confirm('حذف الامتحان المحفوظ «'+e.name+'» نهائيًا؟')) return;
+  saveLib(loadLib().filter(x=>x.id!==id));
+  renderLibrary();
+}
+
+function renderLibrary(){
+  const lib=loadLib();
+  document.getElementById('libcount').textContent=lib.length;
+  const wrap=document.getElementById('lib-list');
+  if(!lib.length){ wrap.innerHTML='<div class="empty-note">لا توجد امتحانات محفوظة بعد. اضغط «حفظ الامتحان» بعد إعداد أسئلتك.</div>'; return; }
+  wrap.innerHTML=lib.slice().reverse().map(e=>{
+    const pts=e.questions.reduce((s,q)=>s+q.points,0);
+    return `<div class="lib-item">
+      <div><div class="lname">${escapeHtml(e.name)}</div>
+        <div class="lmeta">${e.questions.length} أسئلة — ${roundNice(pts)} نقطة — ${e.ts}</div></div>
+      <div class="lbtns">
+        <button onclick="openSaved(${e.id})">فتح</button>
+        <button class="del" onclick="deleteSaved(${e.id})">حذف</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderLibrary();
+
+/* ---------------- sample exam ---------------- */
+function loadSample(){
+  if(questions.length && !confirm('سيُضاف المثال إلى الأسئلة الموجودة. هل تريد المتابعة؟')) return;
+  questions.push(
+    {id:qidSeq++, type:'qcm', text:'ما مشتقة الدالة f(x) = x² ؟', points:2, options:['x','2x','x²','2'], correct:1},
+    {id:qidSeq++, type:'tf', text:'الدالة الأسية eˣ موجبة تمامًا على ℝ.', points:1, correct:'صح'},
+    {id:qidSeq++, type:'short', text:'ما قيمة ln(1) ؟', points:1, correct:'0'}
+  );
+  saveExam();
+  renderQList();
+  flashSaved();
+  document.getElementById('qlist').scrollIntoView({behavior:'smooth',block:'center'});
+}
 
 /* ---------------- student interface ---------------- */
 function buildStudentPaper(){
@@ -657,4 +825,4 @@ function printPaper(){
 </script>
 </body>
 </html>
-
+ 
