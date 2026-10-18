@@ -1,4 +1,4 @@
- <!DOCTYPE html>    
+<!DOCTYPE html>   
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -250,8 +250,8 @@
           <li><b>احفظ واطبع:</b> اضغط «حفظ النتيجة» لتثبيتها في القائمة، و«طباعة الورقة المصححة» لإخراجها على الورق.</li>
         </ol>
 
-        <h4>مثال جاهز: امتحان من 3 أسئلة</h4>
-        <table class="ex-table">
+        <h4 id="ex-title">مثال جاهز: امتحان من 3 أسئلة</h4>
+        <table class="ex-table" id="ex-table">
           <thead><tr><th>#</th><th>النوع</th><th>السؤال</th><th>الإجابة الصحيحة</th><th>النقاط</th></tr></thead>
           <tbody>
             <tr><td>1</td><td>اختيار من متعدد</td><td>ما مشتقة الدالة f(x) = x² ؟<br>الاختيارات: x ـ 2x ـ x² ـ 2</td><td class="ok">2x</td><td>2</td></tr>
@@ -259,8 +259,12 @@
             <tr><td>3</td><td>إجابة قصيرة</td><td>ما قيمة ln(1) ؟</td><td class="ok">0</td><td>1</td></tr>
           </tbody>
         </table>
-        <p>مجموع النقاط = 4. لو أجاب تلميذ بـ «2x» وأخطأ في السؤال الثاني وأصاب الثالث، تكون نتيجته <b>3 / 4</b>.</p>
-        <button class="ghost-btn" onclick="loadSample()">⚡ أضِف هذا المثال إلى امتحاني للتجربة</button>
+        <p id="ex-note">مجموع النقاط = 4. لو أجاب تلميذ بـ «2x» وأخطأ في السؤال الثاني وأصاب الثالث، تكون نتيجته <b>3 / 4</b>.</p>
+        <div class="exam-actions">
+          <button class="ghost-btn" onclick="loadSample()">⚡ أضِف هذا المثال إلى امتحاني للتجربة</button>
+          <button class="ghost-btn" onclick="setAsSample()">⭐ اجعل امتحاني الحالي هو المثال</button>
+          <button class="danger-link" onclick="resetSample()">↩ استعادة المثال الافتراضي</button>
+        </div>
 
         <div class="guide-note">
           💡 <b>ملاحظات:</b> الإجابة القصيرة تُقارَن بعد تجاهل المسافات الزائدة واختلاف الهمزات (أ/ا) وحالة الأحرف.
@@ -641,14 +645,56 @@ function renderLibrary(){
 }
 renderLibrary();
 
+/* ---------------- custom example ---------------- */
+const SAMPLE_KEY='musahih_sample_v1';
+const DEFAULT_SAMPLE=[
+  {id:1, type:'qcm', text:'ما مشتقة الدالة f(x) = x² ؟', points:2, options:['x','2x','x²','2'], correct:1},
+  {id:2, type:'tf', text:'الدالة الأسية eˣ موجبة تمامًا على ℝ.', points:1, correct:'صح'},
+  {id:3, type:'short', text:'ما قيمة ln(1) ؟', points:1, correct:'0'}
+];
+function getSample(){
+  try{
+    const s=JSON.parse(localStorage.getItem(SAMPLE_KEY));
+    if(Array.isArray(s) && s.length) return s;
+  }catch(e){}
+  return DEFAULT_SAMPLE;
+}
+function renderGuideExample(){
+  const s=getSample();
+  const custom = s!==DEFAULT_SAMPLE;
+  const typeLabel={qcm:'اختيار من متعدد',tf:'صح / خطأ',short:'إجابة قصيرة'};
+  const noteEl=document.getElementById('ex-note');
+  if(!noteEl.dataset.def) noteEl.dataset.def=noteEl.innerHTML;
+  document.getElementById('ex-title').textContent=(custom?'مثالك الخاص':'مثال جاهز')+': امتحان من '+s.length+' أسئلة';
+  document.querySelector('#ex-table tbody').innerHTML=s.map((q,i)=>{
+    const opts = q.type==='qcm' ? '<br>الاختيارات: '+q.options.map(escapeHtml).join(' ـ ') : '';
+    const ans = q.type==='qcm' ? q.options[q.correct] : q.correct;
+    return `<tr><td>${i+1}</td><td>${typeLabel[q.type]}</td><td>${escapeHtml(q.text)}${opts}${q.image?'<br>🖼️ (صورة مرفقة)':''}</td><td class="ok">${escapeHtml(String(ans))}</td><td>${q.points}</td></tr>`;
+  }).join('');
+  const total=s.reduce((a,q)=>a+q.points,0);
+  noteEl.innerHTML = custom
+    ? `مجموع النقاط = <b>${roundNice(total)}</b>. هذا هو المثال الذي حدّدتَه أنت، ويُضاف بزر «أضِف هذا المثال».`
+    : noteEl.dataset.def;
+}
+function setAsSample(){
+  if(!questions.length){ alert('أعدّ امتحانك أولًا ثم اضغط هذا الزر'); return; }
+  if(!confirm('سيصبح امتحانك الحالي ('+questions.length+' أسئلة) هو المثال المعروض في هذا الشرح وفي زر «أضِف هذا المثال». هل تريد المتابعة؟')) return;
+  try{ localStorage.setItem(SAMPLE_KEY, JSON.stringify(questions)); }
+  catch(e){ alert('تعذّر الحفظ: ذاكرة المتصفح ممتلئة.'); return; }
+  renderGuideExample();
+  flashSaved();
+}
+function resetSample(){
+  if(!confirm('هل تريد استعادة المثال الافتراضي؟')) return;
+  try{ localStorage.removeItem(SAMPLE_KEY); }catch(e){}
+  renderGuideExample();
+}
+renderGuideExample();
+
 /* ---------------- sample exam ---------------- */
 function loadSample(){
   if(questions.length && !confirm('سيُضاف المثال إلى الأسئلة الموجودة. هل تريد المتابعة؟')) return;
-  questions.push(
-    {id:qidSeq++, type:'qcm', text:'ما مشتقة الدالة f(x) = x² ؟', points:2, options:['x','2x','x²','2'], correct:1},
-    {id:qidSeq++, type:'tf', text:'الدالة الأسية eˣ موجبة تمامًا على ℝ.', points:1, correct:'صح'},
-    {id:qidSeq++, type:'short', text:'ما قيمة ln(1) ؟', points:1, correct:'0'}
-  );
+  JSON.parse(JSON.stringify(getSample())).forEach(q=>{ q.id=qidSeq++; questions.push(q); });
   saveExam();
   renderQList();
   flashSaved();
@@ -882,3 +928,4 @@ function printPaper(){
 </script>
 </body>
 </html>
+ 
