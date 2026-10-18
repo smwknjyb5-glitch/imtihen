@@ -1,4 +1,4 @@
- <!DOCTYPE html>     
+ <!DOCTYPE html>    
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -165,6 +165,14 @@
   .row-actions button{background:none;border:1px solid var(--navy-700);color:#e8cd75;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:'Tajawal';font-size:.78rem;}
   .back-link{background:none;border:none;color:var(--gold-soft);cursor:pointer;font-family:'Tajawal';font-size:.85rem;margin-bottom:14px;padding:0;}
 
+  /* question images */
+  .img-tools{margin-top:8px;}
+  .img-tools .ghost-btn{margin-top:0;}
+  #qimg-preview{margin-top:10px;display:flex;align-items:flex-start;gap:10px;}
+  #qimg-preview img{max-height:120px;max-width:60%;border-radius:8px;border:1px solid var(--navy-700);background:#fff;}
+  .q-img{max-width:100%;max-height:280px;display:block;margin:8px auto 12px;border-radius:6px;border:1px solid rgba(0,0,0,.15);background:#fff;}
+  .q-img.thumb{max-height:90px;margin:6px 0;display:block;}
+
   /* save / new exam + library */
   .exam-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
   .exam-actions .ghost-btn{margin-top:0;}
@@ -235,7 +243,7 @@
       <div class="guide-body">
         <h4>الخطوات</h4>
         <ol>
-          <li><b>أعدّ الامتحان:</b> اكتب نص السؤال، اختر نوعه، حدّد الإجابة الصحيحة وعدد النقاط، ثم اضغط «إضافة السؤال إلى الامتحان». كرّر ذلك لكل سؤال. بعد الانتهاء اضغط «💾 حفظ الامتحان» ليُحفظ باسم تختاره في قائمة «الامتحانات المحفوظة» (تفتحه لاحقًا بزر «فتح»)، و«🆕 امتحان جديد» لبدء امتحان فارغ.</li>
+          <li><b>أعدّ الامتحان:</b> اكتب نص السؤال، اختر نوعه، حدّد الإجابة الصحيحة وعدد النقاط، ثم اضغط «إضافة السؤال إلى الامتحان». كرّر ذلك لكل سؤال. بعد الانتهاء اضغط «💾 حفظ الامتحان» ليُحفظ باسم تختاره في قائمة «الامتحانات المحفوظة» (تفتحه لاحقًا بزر «فتح»)، و«🆕 امتحان جديد» لبدء امتحان فارغ. ولإرفاق صورة بسؤال (شكل، منحنى، جدول...) اضغط «🖼️ إضافة صورة» قبل إضافة السؤال؛ تظهر الصورة للتلميذ وفي ورقة التصحيح والطباعة.</li>
           <li><b>سلّم الجهاز للتلميذ:</b> اضغط «🎓 واجهة التلميذ». سيُطلب منك رمز سري اختياري، ثم يختفي شريط الإعداد فلا يرى التلميذ إلا ورقة الإجابة.</li>
           <li><b>التلميذ يجيب:</b> يكتب اسمه، يجيب عن الأسئلة، ثم يضغط «إرسال الإجابة». بعدها تُسلَّم الجهاز لتلميذ آخر بنفس الطريقة (تفتح واجهة التلميذ من جديد).</li>
           <li><b>أنت تصحّح:</b> اضغط «🔒 خروج الأستاذ» (وأدخل الرمز إن وضعته)، ثم افتح «🧑‍🏫 واجهة الأستاذ»، اختر الورقة واضغط «صحّح الورقة». تظهر علامات ✓ و✗ والنتيجة على الختم.</li>
@@ -246,9 +254,9 @@
         <table class="ex-table">
           <thead><tr><th>#</th><th>النوع</th><th>السؤال</th><th>الإجابة الصحيحة</th><th>النقاط</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td>اختيار من متعدد</td><td>ما اسم الولاية ذات الرقم 23   ؟<br>الاختيارات: قسنطينة-عنابة-سكيكدة </td><td class="ok"> عنابة</td><td>2</td></tr>
-            <tr><td>2</td><td>صح / خطأ</td><td> العدد 132 يقبل القسمة على 3</td><td class="ok">صح</td><td>1</td></tr>
-            <tr><td>3</td><td>إجابة قصيرة</td><td> ما هو حاصل قسمة 24 على 4 </td><td class="ok">6</td><td>1</td></tr>
+            <tr><td>1</td><td>اختيار من متعدد</td><td>ما مشتقة الدالة f(x) = x² ؟<br>الاختيارات: x ـ 2x ـ x² ـ 2</td><td class="ok">2x</td><td>2</td></tr>
+            <tr><td>2</td><td>صح / خطأ</td><td>الدالة الأسية eˣ موجبة تمامًا على ℝ.</td><td class="ok">صح</td><td>1</td></tr>
+            <tr><td>3</td><td>إجابة قصيرة</td><td>ما قيمة ln(1) ؟</td><td class="ok">0</td><td>1</td></tr>
           </tbody>
         </table>
         <p>مجموع النقاط = 4. لو أجاب تلميذ بـ «2x» وأخطأ في السؤال الثاني وأصاب الثالث، تكون نتيجته <b>3 / 4</b>.</p>
@@ -265,6 +273,11 @@
       <h2>سؤال جديد</h2>
       <label>نص السؤال</label>
       <textarea id="qtext" rows="2" placeholder="اكتب نص السؤال هنا..."></textarea>
+      <div class="img-tools">
+        <button class="ghost-btn" type="button" onclick="document.getElementById('qimg-file').click()">🖼️ إضافة صورة</button>
+        <input type="file" id="qimg-file" accept="image/*" style="display:none" onchange="pickImage(this)">
+        <div id="qimg-preview"></div>
+      </div>
 
       <label>نوع السؤال</label>
       <div class="type-tabs">
@@ -382,7 +395,7 @@ addEventListener('resize',initStars);
 /* ---------------- storage ---------------- */
 const EXAM_KEY='musahih_exam_v1', SUB_KEY='musahih_submissions_v1';
 function loadExam(){ try{return JSON.parse(localStorage.getItem(EXAM_KEY))||[];}catch(e){return [];} }
-function saveExam(){ try{localStorage.setItem(EXAM_KEY, JSON.stringify(questions));}catch(e){} }
+function saveExam(){ try{localStorage.setItem(EXAM_KEY, JSON.stringify(questions));}catch(e){ alert('تعذّر الحفظ: ذاكرة المتصفح ممتلئة. قلّل عدد الصور أو احذف امتحانات محفوظة قديمة.'); } }
 function loadSubs(){ try{return JSON.parse(localStorage.getItem(SUB_KEY))||[];}catch(e){return [];} }
 function saveSubs(list){ try{localStorage.setItem(SUB_KEY, JSON.stringify(list));}catch(e){} }
 
@@ -445,11 +458,47 @@ function addOption(){
 }
 addOption();addOption();
 
+/* ---- question image ---- */
+let currentImage=null;
+function pickImage(input){
+  const file=input.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ alert('اختر ملف صورة'); input.value=''; return; }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      const max=800;
+      let w=img.width, h=img.height;
+      if(w>max||h>max){ const r=Math.min(max/w,max/h); w=Math.round(w*r); h=Math.round(h*r); }
+      const c=document.createElement('canvas');
+      c.width=w; c.height=h;
+      const cx=c.getContext('2d');
+      cx.fillStyle='#fff'; cx.fillRect(0,0,w,h);
+      cx.drawImage(img,0,0,w,h);
+      currentImage=c.toDataURL('image/jpeg',0.8);
+      showImgPreview();
+    };
+    img.onerror=()=>alert('تعذّر قراءة الصورة');
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+  input.value='';
+}
+function showImgPreview(){
+  const box=document.getElementById('qimg-preview');
+  box.innerHTML = currentImage
+    ? `<img src="${currentImage}" alt=""><button class="danger-link" type="button" onclick="clearImage()">حذف الصورة</button>`
+    : '';
+}
+function clearImage(){ currentImage=null; showImgPreview(); }
+
 function addQuestion(){
   const text=document.getElementById('qtext').value.trim();
   const points=parseFloat(document.getElementById('qpoints').value)||1;
   if(!text){alert('الرجاء كتابة نص السؤال أولاً');return;}
   let q={id:qidSeq++, type:currentType, text, points};
+  if(currentImage) q.image=currentImage;
   if(currentType==='qcm'){
     const rows=[...document.querySelectorAll('#opts-list .opt-row')];
     const opts=rows.map(r=>r.querySelector('input[type=text]').value.trim());
@@ -472,6 +521,7 @@ function addQuestion(){
   document.getElementById('opts-list').innerHTML='';
   addOption();addOption();
   document.getElementById('short-answer').value='';
+  clearImage();
   flashSaved();
 }
 function flashSaved(){
@@ -497,6 +547,7 @@ function renderQList(){
       <button class="del-x" onclick="removeQuestion(${q.id})">✕</button>
       <div class="qmeta"><span class="qnum">س${i+1}</span><span class="qtype">${typeLabel[q.type]}</span></div>
       <div class="qtext">${escapeHtml(q.text)}</div>
+      ${q.image ? `<img class="q-img thumb" src="${q.image}" alt="">` : ''}
       <div class="qanswer">✓ ${q.type==='qcm' ? escapeHtml(q.options[q.correct]) : escapeHtml(String(q.correct))}</div>
       <div class="qpoints">${q.points} نقطة</div>
     </div>`).join('');
@@ -508,7 +559,7 @@ renderQList();
 const LIB_KEY='musahih_library_v1';
 let currentExamName='';
 function loadLib(){ try{return JSON.parse(localStorage.getItem(LIB_KEY))||[];}catch(e){return [];} }
-function saveLib(l){ try{localStorage.setItem(LIB_KEY, JSON.stringify(l));}catch(e){} }
+function saveLib(l){ try{localStorage.setItem(LIB_KEY, JSON.stringify(l));}catch(e){ alert('تعذّر حفظ الامتحان: ذاكرة المتصفح ممتلئة. احذف امتحانات محفوظة قديمة أو قلّل عدد الصور.'); } }
 
 function saveCurrentExam(){
   if(!questions.length){alert('أضِف سؤالًا واحدًا على الأقل قبل حفظ الامتحان');return false;}
@@ -615,6 +666,12 @@ function buildStudentPaper(){
   wrap.innerHTML=questions.map((q,i)=>renderPQ(q,i,'student')).join('');
 }
 function renderPQ(q,i,scope){
+  const html=renderPQBase(q,i,scope);
+  if(!q.image) return html;
+  // insert the image right after the question text line
+  return html.replace('</div>', m=>m+`<img class="q-img" src="${q.image}" alt="">`);
+}
+function renderPQBase(q,i,scope){
   if(q.type==='qcm'){
     return `<div class="pq" data-qid="${q.id}">
       <div class="ptxt">${i+1}. ${escapeHtml(q.text)} <span class="pts-tag">(${q.points} ن)</span></div>
@@ -825,4 +882,3 @@ function printPaper(){
 </script>
 </body>
 </html>
- 
